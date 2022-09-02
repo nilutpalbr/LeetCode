@@ -21,24 +21,22 @@
  */
 class Solution {
 public:
-    
-    TreeNode* helper(vector<int> inorder,int l,int r){
-        if(l>r)return NULL;
-      int mid= l+ (r-l)/2;
-      TreeNode* root= new TreeNode(inorder[mid]);
-         root->left=helper(inorder,l,mid-1);
-         root->right=helper(inorder,mid+1,r);
-     return root;
+    vector<int> arr;
+    TreeNode* help(int l, int r){
+        if(l>r){
+            return NULL;
+        }
+        int mid=(l+r)/2;
+        TreeNode* root = new TreeNode(arr[mid]);
+        root->left = help(l, mid-1);
+        root->right = help(mid+1, r);
+        return root;
     }
-    
     TreeNode* sortedListToBST(ListNode* head) {
-       if(head==NULL)return NULL;
-        vector<int> inorder;
         while(head){
-            inorder.push_back(head->val);
+            arr.push_back(head->val);
             head=head->next;
         }
-       int size=inorder.size();
-      return helper(inorder,0,size-1);
+        return help(0, arr.size()-1);
     }
 };
