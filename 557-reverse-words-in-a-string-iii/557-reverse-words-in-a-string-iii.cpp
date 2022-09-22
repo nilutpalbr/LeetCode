@@ -1,27 +1,15 @@
 class Solution {
 public:
     string reverseWords(string s) {
-         stack<string> st2; string temp="";
-        for(int i=s.length()-1;i>=0;i--){
-            if(s[i]==' '){
-                st2.push(temp);
-                temp="";
-            }
-            else{
-                temp+=s[i];
+        int n = s.length();
+        int j=0;
+        
+        for(int i=0;i<=n;i++){
+            if(s[i]==' '|| s[i]=='\0'){//s[i]=='\0' for last word//
+                reverse(s.begin()+j,s.begin()+i);
+                j=i+1;
             }
         }
-        string temp2=temp;
-        string ans="";
-        st2.push(temp2);
-        while(!st2.empty()){
-            string top=st2.top();
-            st2.pop();
-            ans+=top;
-            ans+=" ";
-        }
-        //ans+=temp2;
-        ans.pop_back();
-        return ans;
+        return s;
     }
 };
